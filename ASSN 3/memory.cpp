@@ -10,11 +10,14 @@
  //* 	Section: -0001
  //***********************************************************************************
 
-// Include STL libraries  
-#include <iostream>
+#include "memory.h"
+
+//For debug
+/*
+        Defined at runtime!
 
 
-
+*/
 int main(int argc, char **argv)
 {
    
