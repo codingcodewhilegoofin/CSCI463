@@ -4,7 +4,7 @@
 #define  hex_H
 
 // Appropriate libraries
-#include  <string >
+#include  <string>
 #include  <stdint.h>
 
 // Declaring 3 seperate strings each with different sizes.

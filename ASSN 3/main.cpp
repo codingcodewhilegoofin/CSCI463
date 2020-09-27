@@ -105,25 +105,25 @@ int main(int argc, char **argv)
         usage(); // invalid command-line arguments (e.g. an english word where a number is expected)
     mem.dump(); // Call the dump method from our memory class 
 
-    //Output?
+    //Output
     std::cout  << mem.get_size () << std::endl; // Call getsize() method
-    std::cout  << hex32(mem.get8 (0))  << std::endl; // Convert what the get8() method returns to a 32bit hex number
-    std::cout  << hex32(mem.get16 (0))  << std::endl;
-    std::cout  << hex32(mem.get32 (0))  << std::endl;
-    std::cout  << hex0x32(mem.get8 (0))  << std::endl;// Convert to 0x32 bit hex format
-    std::cout  << hex0x32(mem.get16 (0))  << std::endl;
-    std::cout  << hex0x32(mem.get32 (0))  << std::endl;
+    //std::cout  << hex32(mem.get8 (0))  << std::endl; // Convert what the get8() method returns to a 32bit hex number
+    //std::cout  << hex32(mem.get16 (0))  << std::endl;
+    //std::cout  << hex32(mem.get32 (0))  << std::endl;
+    //std::cout  << hex0x32(mem.get8 (0))  << std::endl;// Convert to 0x32 bit hex format
+    //std::cout  << hex0x32(mem.get16 (0))  << std::endl;
+    //std::cout  << hex0x32(mem.get32 (0))  << std::endl;
     std::cout  << hex8(mem.get8 (0))  << std::endl;// Convert to 8 bit hex value 
     std::cout  << hex8(mem.get16 (0))  << std::endl;
     std::cout  << hex8(mem.get32 (0))  << std::endl;
-    std::cout  << hex0x32(mem.get32(0x1000)) << std::endl; // Already converted number?
+    //std::cout  << hex0x32(mem.get32(0x1000)) << std::endl; // Already converted number?
 
     // Save in memory 
-    mem.set8(0x10 , 0x12); // Mem object will call its 8 bit set method, taking 0x format hex values
-    mem.set16(0x14 , 0x1234);
-    mem.set32(0x18 , 0x87654321 );
+    //mem.set8(0x10 , 0x12); // Mem object will call its 8 bit set method, taking 0x format hex values
+    //mem.set16(0x14 , 0x1234);
+    //mem.set32(0x18 , 0x87654321 );
 
-    mem.dump (); // Call the dump method from our memory class 
+    //mem.dump (); // Call the dump method from our memory class 
 
 
     return 0;

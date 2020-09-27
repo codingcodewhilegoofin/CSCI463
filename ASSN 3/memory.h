@@ -1,8 +1,12 @@
 #ifndef  memory_H
 #define  memory_H
 
-#include  <string >
+#include  <string>
 #include  <stdint.h>
+#include  <iostream>
+#include  <ctype.h>
+#include  <stdio.h>
+#include  <fstream>
 
 // Class doc??
 class  memory
@@ -29,7 +33,7 @@ class  memory
            In  the  destructor,  free  the  memory  that  was  allocated  in  the  constructor  to  represent  thesimulated memory.
         
         */
-        ~memory ();
+        ~memory();
 
         // Check stuff...
         //Note thatcheck_address()warnings are not simulator or user errors and therefore they must bewritten to stdout.)
@@ -124,7 +128,7 @@ class  memory
              to display indump().
         
         */
-        uint32_t  size;
+        uint32_t size;
 
 };
 
