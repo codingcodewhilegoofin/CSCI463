@@ -27,6 +27,9 @@ memory::memory(uint32_t  siz)
         // Declare an array of pointers size 48 on the heap 
         mem = new (std::nothrow) uint8_t[size];
 
+        
+        std::cout <<  size << std::endl;
+
 
         //mem.resize(size, 0xa5);
 
@@ -37,8 +40,10 @@ memory::memory(uint32_t  siz)
         }
         else
         {       
+
                 // For debug
                 std::cout << "Creating empty memory through for loop ........." << std::endl;
+
                 
                 // Create empty memory on programm initalization
                 for (uint32_t n=0; n < size; ++n)
@@ -68,19 +73,15 @@ uint32_t  memory::get_size () const
 
 bool memory::check_address(uint32_t i) const
 {
-        //std::cout << "In check_address....." << std::endl << std::endl; 
-        //std::cout << "Making sure its less than 48... " << i << std::endl << std::endl; 
-
+        
         if( i <= get_size())
         {
-                  return true;
-
-
+                return true;
         }
         else
         {
-                //Obviously, formatting this warning message will involve using your hex0x32() function.
-                std::cout << "WARNING: Address out of range:" << i;
+                
+                std::cout << "WARNING: Address out of range: " << hex0x32(i) << std::endl;
                 return false;
         }
         
@@ -92,14 +93,9 @@ bool memory::check_address(uint32_t i) const
 
 uint8_t  memory::get8(uint32_t  addr) const
 {
-        //std::cout << "In get8....." << std::endl << std::endl;  
-
-        //std::cout << "Checking for address.. " << addr << std::endl << std::endl; 
-
+        
         if( check_address(addr) == true )
         {
-                //std::cout << "Returning" << mem[addr] << std::endl << std::endl; 
-
                 return mem[addr];
         }
         else
@@ -107,33 +103,34 @@ uint8_t  memory::get8(uint32_t  addr) const
                 return 0;
         }
             
-
 }
         
        
-/* uint16_t  memory::get16(uint32_t  addr) const
+ uint16_t  memory::get16(uint32_t  addr) const
 {
-        get8(addr);
-        get8(addr);
 
-        //A little-endian system, in contrast, stores the least-significant byte at the smallest address
-
-
+        uint8_t byte1 = get8(addr);
+        uint8_t byte2 = get8(addr + 1 );
+        
+       
+	return byte2 << 8 | byte1;
+        
 }
         
-uint32_t  memory::get32(uint32_t  addr) const
+ uint32_t  memory::get32(uint32_t  addr) const
 {
-        get16(addr);
-        get16(addr);
-
-        //A little-endian system, in contrast, stores the least-significant byte at the smallest address
-
-} */
+        uint16_t byte1 = get16(addr);
+        uint16_t byte2 = get16(addr + 1 );
+       
+       
+	return byte2 << 16 | byte1;
+        
+}  
 
 
 void  memory::set8(uint32_t  addr , uint8_t  val)
 {
-        //std::cout << "In set8 function ....." << std::endl; 
+      
 
         if( check_address(addr) == true )
         {
@@ -141,41 +138,38 @@ void  memory::set8(uint32_t  addr , uint8_t  val)
         }
         
 }
-       
-/* void  memory::set16(uint32_t  addr , uint16_t  val)
+
+
+ void  memory::set16(uint32_t  addr , uint16_t  val)
 {
+    
 
-        //set8(addr);
-        //set8(addr);
+        set8(addr+1, val >> 8);
 
-        //A little-endian system, in contrast, stores the least-significant byte at the smallest address
+	set8(addr, val);
+
+	mem[addr] = val;
+       
 }    
+
 
 void  memory::set32(uint32_t  addr , uint32_t  val)
 {
-        //set16(addr);
-        //set16(addr);
+        set16(addr+1, val >> 8);
 
-        //A little-endian system, in contrast, stores the least-significant byte at the smallest address
-} */
+	set16(addr+2, val >> 16);
+
+	mem[addr] = val;
+} 
+
 
 void  memory::dump()  const
 {
-        std::cout << "In dump ....." << std::endl;
-
-        
-        //In this code fragment, the i variable is the address counter in the loop
-        // that is formatting andprinting the memory bytes one at-a-time,
-        //ascii is a 17-byte character array that is used to collect the 16 print characters 
-        //(plus the null-terminator) to display at the end of the currentline of hex bytes, 
-        //and isprint()is a standard C library function you can read about in the 
-        //on line manual or google it.
+      
 
         int outputcounter = 10;
         uint32_t oc2 = 0;
-        uint32_t oc3 = 0;
         unsigned int i = 0;
-        uint32_t j = 0;
         std::string baseCounter = "00000000:";
         std::string newBase = "";
         unsigned char ascii[16] = { };
@@ -247,16 +241,17 @@ void  memory::dump()  const
                         ascii[k%16] = isprint(ch) ? ch : '.';     
                 }
 
+
                 std::cout << "*";
 
                
-
-                for ( j = j; j < size-(32-oc3); j++)
+                for (uint32_t j = 0; j < size-32; j++)
                 {
 
-                        if ((j % 16 == 0) && (j != 0) && !(ascii[j] == 0xa5))
+                        if ( (j % 16 == 0) && (j != 0) && !(ascii[j] == 0xa5) )
                         {
                                 std::cout << ascii;
+                               
                         }
                         else
                         {
@@ -268,67 +263,52 @@ void  memory::dump()  const
 
 
 
+
+
                 std::cout << std::endl;
 
                 oc2 = oc2 + 16;
-                oc3 = oc3 + 16;
-                j = j + 16;
                 i++;
 
         }
 
         
 
-        std::cout << std::endl;
-
 //end
 }
 
 
 
-bool  memory::load_file(const std::string &fname )
-{       
-        std::cout << "Load_file....." << std::endl; 
+bool memory::load_file(const std::string& fname)
+{
 
-        char temporary = 0;
+	char temp;
+	uint32_t i=0;
 
-        std::ifstream infile(fname, std::ios::in|std::ios::binary);
+	std::ifstream infile(fname, std::ios::in|std::ios::binary);
 
-        if(!infile)
+	
+	if(!infile)
         {
-                std::cerr << "Cannot open file " << fname;
-
-                return false;
-        }
-        else
+		std::cout << "File " << fname << " could not open" << std::endl;
+		return false;
+	}
+	while(infile.get(temp))
         {
-                //while reading from the file
-                while(infile.get(temporary))
-                {       
-                
-                     std::cout << "Inside file ....." << std::endl; 
-                
-                     int i = 0;   
+		
+		if(check_address(i))
+                {
+			
+			mem[i] = temp;
+		}
+		else{
+			std::cerr << "Program too big." <<  std::endl;
+			return false;
+		}
 
-                     //Check file one byte at a time
-                     if(check_address(i) == true )
-                     {
-                        std::cout << "Adress exists....." << std::endl; 
-                        mem[i] = temporary;
-                          
-                     }
-                     else
-                     {
-                        std::cerr << "Program too big ! " << fname;
+		i++;
+	
+	}
 
-                        return false;
-                     }
-
-                     i++;
-                }
-                infile.close();
-                return true;
-        }
-        
-
+	return true;
 }

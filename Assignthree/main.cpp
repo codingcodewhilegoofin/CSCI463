@@ -86,10 +86,7 @@ int main(int argc, char **argv)
     }
 
 
-
-    // Memory object "mem" will take the second command line argument as an argument
-    //              Takes one argument size! Which is converted ! 
-    std::cout << "Constructing memory object........." << std::endl; 
+    
     memory mem(     std::stoul(argv[1]  ,   0   ,   16  )        );
     
     
@@ -99,7 +96,7 @@ int main(int argc, char **argv)
 
 
 
-    /* std::cout << "Loading file............" << std::endl; 
+    
     // If we ARE NOT able to sucessfully load a file through the load_file() method
     if(!mem.load_file( argv[2] ) ) // Pass the 3rd argument
     {
@@ -107,47 +104,36 @@ int main(int argc, char **argv)
     }
     else
     {
-        std::cout << "Dumping....." << std::endl; 
+        
         mem.dump(); // Call the dump method from our memory class 
-    } */
+    }
       
 
 
 
-
-    //Output
-    std::cout << "Outputing memory size............" << std::endl; 
-    std::cout  << mem.get_size () << std::endl; // Call getsize() method
-    //std::cout  << hex32(mem.get8 (0))  << std::endl; // Convert what the get8() method returns to a 32bit hex number
-    //std::cout  << hex32(mem.get16 (0))  << std::endl;
-    //std::cout  << hex32(mem.get32 (0))  << std::endl;
-    //std::cout  << hex0x32(mem.get8 (0))  << std::endl;// Convert to 0x32 bit hex format
-    //std::cout  << hex0x32(mem.get16 (0))  << std::endl;
-    //std::cout  << hex0x32(mem.get32 (0))  << std::endl;
-    //std::cout << "Calling hex8 function............" << std::endl; 
-    //std::cout << "Calling from memory get8 function............" << std::endl;
-    //std::cout << "Passing 0 ............" << std::endl;
-    //std::cout  << hex8(mem.get8 (0))  << std::endl;// Convert to 8 bit hex value 
-    //std::cout  << hex8(mem.get16 (0))  << std::endl;
-    //std::cout  << hex8(mem.get32 (0))  << std::endl;
-    //std::cout  << hex0x32(mem.get32(0x1000)) << std::endl; // Already converted number?
+ 
+    std::cout  << mem.get_size () << std::endl; 
+    std::cout  << hex32(mem.get8 (0))  << std::endl; 
+    std::cout  << hex32(mem.get16 (0))  << std::endl;
+    std::cout  << hex32(mem.get32 (0))  << std::endl;
+    std::cout  << hex0x32(mem.get8 (0))  << std::endl;
+    std::cout  << hex0x32(mem.get16 (0))  << std::endl;
+    std::cout  << hex0x32(mem.get32 (0))  << std::endl;
+    std::cout  << hex8(mem.get8 (0))  << std::endl;
+    std::cout  << hex8(mem.get16 (0))  << std::endl;
+    std::cout  << hex8(mem.get32 (0))  << std::endl;
+    std::cout  << hex0x32(mem.get32(0x1000)) << std::endl; 
 
 
 
 
+    
+    mem.set8(0x10 , 0x12); 
+    mem.set16(0x14 , 0x1234);
+    mem.set32(0x18 , 0x87654321 );
 
 
-    // Save in memory 
-    //std::cout << "Calling from memory set8 function............" << std::endl;
-    //std::cout << "Passing address 0x10, finding adress , setting address to 0x12............" << std::endl;
-    //mem.set8(0x10 , 0x12); // Mem object will call its 8 bit set method, taking 0x format hex values
-    //mem.set16(0x14 , 0x1234);
-    //mem.set32(0x18 , 0x87654321 );
-
-
-
-    //std::cout << "Dumping....." << std::endl; 
-    //mem.dump (); // Call the dump method from our memory class 
+    mem.dump ();
 
 
 
