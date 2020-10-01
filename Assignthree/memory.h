@@ -1,12 +1,18 @@
 #ifndef  memory_H
 #define  memory_H
 
-#include  <string>
-#include  <stdint.h>
-#include  <iostream>
-#include  <ctype.h>
-#include  <stdio.h>
-#include  <fstream>
+#include <string>
+#include <stdint.h>
+#include <iostream>
+#include <ctype.h>
+#include <stdio.h>
+#include <fstream>
+#include <new>
+
+
+
+#include  "hex.h"
+
 
 // Class doc??
 class  memory

@@ -39,6 +39,8 @@ In other words, your program will NEVER format a printable 32-bit hex number any
 
 std::string hex8(uint8_t i)
 {
+    std::cout << "In hex8 function....." << std::endl; 
+
     //Outstring object 
     std::ostringstream os;
     
@@ -51,31 +53,21 @@ std::string hex8(uint8_t i)
     
 }
 
-std::string hex32(uint32_t i)
+
+
+/* std::string hex32(uint32_t i)
 {
 
-    /*
-        This function will return astd::stringwith 8 hex digits 
-        representing the 32 bits of theiargument.
     
-    */
 
-}
+} 
 
-std::string hex0x32(uint32_t i)
+
+ std::string hex0x32(uint32_t i)
 {
-    /*
-        This  function  will  return  a std::string beginning  with 0x,  followed  by  the  
-        8  hex  digits representing the 32 bits of the i argument. 
-        It must be implemented by creating a string by concatenating a 0x to the 
-        output of your hex 32() function like this: return std::string("0x")+hex32(i);
-         
-        In other words, your program will NEVER format a printable 32-bit hex number 
-        anywhere in your application other than in your hex32() function.
-    
-    */
-
-}
+   
+ 
+} */
 
 
 // This is one way to format an 8-bit integer into an 2-character hex string with leading zeros:
