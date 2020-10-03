@@ -1,6 +1,6 @@
  //***********************************************************************************
  //*
- //* 	prog3.cpp
+ //* 	main.cpp
  //*	CSCI 463 Assignment 3 
  //*
  //* 	Giovanni Moscato Z1820207
@@ -10,6 +10,7 @@
  //* 	Section: -0001
  //*
  //*    Cited Sources: http://courses.cms.caltech.edu/cs11/material/general/usage.html
+ //*                   https://en.wikipedia.org/wiki/Usage_message
  //***********************************************************************************
 
 // Include STL libraries  
@@ -18,41 +19,27 @@
 #include "hex.h"
 
 
-/* CSCI 463 Assignment 3 – Memory Simulator20 PointsAbstractIn this assignment, 
-you will write a C++ program to simulate a computer system memory.  
-This is the first of a multi-part assignment concluding with a simple computing machine capable ofexecuting  real  programs  compiled  with g++.  
-The  purpose  is  to  gain  an  understanding  of  amachine, 
-its  instruction  set  and  how  its  features  are  used  by  realistic  programs  written  inC/C++. */
-
-
-
 
 /**
  * 	Display a proper command line error mesage 
  *
- * 	This function will take exactly 3 arguments
- *  If the incorrect ammount of arg's are entered by the user we print a usage() messge
- *   
+ * 	@param none
  *
- * 	@param argc Number of command line arguments 
+ * 	@return integer 
  *
- * 	@return 
+ * 	@note exits by standard method
  *
- * 	@note 
+ * 	@warning none
  *
- * 	@warning 
- *
- * 	@bug 
- *
- * 	          
+ * 	@bug none
+ *         
  **/
 int usage()
 {
-    std::cerr << "Usage: " << "WRONG" << std::endl;
+    std::cerr << "Usage: ./memory size filename" << std::endl; // Standard cerr output message
 
-    exit(0);
+    exit(1);
 }
-
 
 
 /**
@@ -70,48 +57,37 @@ int usage()
  *
  * 	@note Function usage(): will print error message and terminate 
  *
- * 	@warning 
+ * 	@warning none
  *
- * 	@bug 
- *
- * 	          
+ * 	@bug none
+ *         
  **/
 int main(int argc, char **argv)
 {
-    
+    // If number of arguments is incorrect
     if(argc != 3)
     {
         
-        usage();
+        usage(); // Standard usage message called
     }
 
-
-    
-    memory mem(     std::stoul(argv[1]  ,   0   ,   16  )        );
-    
-    
-
-    
-    mem.dump (); // Call the dump method from our memory class 
+    // Mem constructor will have the size converted into base 16 before being passed
+    memory mem(     std::stoul(argv[1]  ,   0   ,   16  )        ); // Call mem constructor
+                                                        
+    mem.dump (); // Call the dump method from our memory class to display empty array
 
 
-
-    
     // If we ARE NOT able to sucessfully load a file through the load_file() method
     if(!mem.load_file( argv[2] ) ) // Pass the 3rd argument
     {
-        usage(); // invalid command-line arguments (e.g. an english word where a number is expected)
+        usage(); // invalid command-line arguments 
     }
     else
     {
-        
-        mem.dump(); // Call the dump method from our memory class 
+        mem.dump(); // Call the dump method from our memory class with file input
     }
       
-
-
-
- 
+    // Ouput converted to hex equilvalent 
     std::cout  << mem.get_size () << std::endl; 
     std::cout  << hex32(mem.get8 (0))  << std::endl; 
     std::cout  << hex32(mem.get16 (0))  << std::endl;
@@ -124,18 +100,12 @@ int main(int argc, char **argv)
     std::cout  << hex8(mem.get32 (0))  << std::endl;
     std::cout  << hex0x32(mem.get32(0x1000)) << std::endl; 
 
-
-
-
-    
+    // Set to certian values from address specified 
     mem.set8(0x10 , 0x12); 
     mem.set16(0x14 , 0x1234);
     mem.set32(0x18 , 0x87654321 );
 
-
-    mem.dump ();
-
-
+    mem.dump (); // Final dump after memory has been set 
 
     return 0;
 }
