@@ -15,8 +15,12 @@
 
 // Include STL libraries  
 #include <iostream>
-#include "memory.h"
+
+#include <unistd.h>  
+
 #include "hex.h"
+#include "memory.h"
+#include "rv32i.h"
 
 
 /**
@@ -65,7 +69,7 @@ static  void  usage ()
 int  main(int argc , char **argv)
 {
 
-    uint32_t  memory_limit = 0x1000;      //  default  memory  size = 64k
+    uint32_t  memory_limit = 0x10000;      //  default  memory  size = 64k
     int opt;
 
     while ((opt = getopt(argc , argv , "m:")) !=  -1)
@@ -88,7 +92,7 @@ int  main(int argc , char **argv)
         usage();
         
     rv32i  sim(&mem);
-    sim.disasm ();
+    sim.disasm();
     mem.dump();
     return  0;
 
