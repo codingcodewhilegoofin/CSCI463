@@ -1,17 +1,4 @@
- //***********************************************************************************
- //*
- //* 	main.cpp
- //*	CSCI 463 Assignment 3 
- //*
- //* 	Giovanni Moscato Z1820207
- //*
- //*	Memory Simulator
- //* 	Instructor: John Winans
- //* 	Section: -0001
- //*
- //*    Cited Sources: http://courses.cms.caltech.edu/cs11/material/general/usage.html
- //*                   https://en.wikipedia.org/wiki/Usage_message
- //***********************************************************************************
+
 
 // Include STL libraries  
 #include <iostream>
