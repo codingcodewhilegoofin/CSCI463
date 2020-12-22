@@ -1,15 +1,4 @@
- //***********************************************************************************
- //*
- //* 	memory.cpp
- //*	CSCI 463 Assignment 5
- //*
- //* 	Giovanni Moscato Z1820207
- //*
- //*	Memory Simulator
- //* 	Instructor: John Winans
- //* 	Section: -0001
- //*
- //***********************************************************************************
+
 
 // Local header file 
 #include "memory.h"
